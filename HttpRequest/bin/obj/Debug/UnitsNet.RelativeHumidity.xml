@@ -1,0 +1,98 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>UnitsNet.RelativeHumidity</name>
+    </assembly>
+    <members>
+        <member name="T:UnitsNet.RelativeHumidity">
+            <inheritdoc />
+            <summary>
+                Relative humidity is a ratio of the actual water vapor present in the air to the maximum water vapor in the air at the given temperature.
+            </summary>
+        </member>
+        <member name="F:UnitsNet.RelativeHumidity._value">
+            <summary>
+                The numeric value this quantity was constructed with.
+            </summary>
+        </member>
+        <member name="F:UnitsNet.RelativeHumidity._unit">
+            <summary>
+                The unit this quantity was constructed with.
+            </summary>
+        </member>
+        <member name="P:UnitsNet.RelativeHumidity.Value">
+            <summary>
+                The numeric value this quantity was constructed with.
+            </summary>
+        </member>
+        <member name="P:UnitsNet.RelativeHumidity.Unit">
+            <inheritdoc />
+        </member>
+        <member name="M:UnitsNet.RelativeHumidity.#ctor(System.Double,UnitsNet.Units.RelativeHumidityUnit)">
+            <summary>
+                Creates the quantity with the given numeric value and unit.
+            </summary>
+            <param name="value">The numeric value to construct this quantity with.</param>
+            <param name="unit">The unit representation to construct this quantity with.</param>
+            <exception cref="T:System.ArgumentException">If value is NaN or Infinity.</exception>
+        </member>
+        <member name="P:UnitsNet.RelativeHumidity.BaseUnit">
+            <summary>
+                The base unit of Duration, which is Second. All conversions go via this value.
+            </summary>
+        </member>
+        <member name="P:UnitsNet.RelativeHumidity.MaxValue">
+            <summary>
+            Represents the largest possible value of Duration
+            </summary>
+        </member>
+        <member name="P:UnitsNet.RelativeHumidity.MinValue">
+            <summary>
+            Represents the smallest possible value of Duration
+            </summary>
+        </member>
+        <member name="P:UnitsNet.RelativeHumidity.Zero">
+            <summary>
+                Gets an instance of this quantity with a value of 0 in the base unit Second.
+            </summary>
+        </member>
+        <member name="P:UnitsNet.RelativeHumidity.Percent">
+            <summary>
+                Gets a <see cref="T:System.Double"/> value of this quantity converted into <see cref="F:UnitsNet.Units.RelativeHumidityUnit.Percent"/>
+            </summary>
+        </member>
+        <member name="M:UnitsNet.RelativeHumidity.FromPercent(System.Double)">
+            <summary>
+                Creates a <see cref="T:UnitsNet.RelativeHumidity"/> from <see cref="F:UnitsNet.Units.RelativeHumidityUnit.Percent"/>.
+            </summary>
+            <exception cref="T:System.ArgumentException">If value is NaN or Infinity.</exception>
+        </member>
+        <member name="M:UnitsNet.RelativeHumidity.From(System.Double,UnitsNet.Units.RelativeHumidityUnit)">
+            <summary>
+                Dynamically convert from value and unit enum <see cref="T:UnitsNet.Units.RelativeHumidityUnit" /> to <see cref="T:UnitsNet.RelativeHumidity" />.
+            </summary>
+            <param name="value">Value to convert from.</param>
+            <param name="fromUnit">Unit to convert from.</param>
+            <returns>RelativeHumidity unit value.</returns>
+        </member>
+        <member name="M:UnitsNet.RelativeHumidity.As(UnitsNet.Units.RelativeHumidityUnit)">
+            <summary>
+                Convert to the unit representation <paramref name="unit" />.
+            </summary>
+            <returns>Value converted to the specified unit.</returns>
+        </member>
+        <member name="M:UnitsNet.RelativeHumidity.ToUnit(UnitsNet.Units.RelativeHumidityUnit)">
+            <summary>
+                Converts this Duration to another Duration with the unit representation <paramref name="unit" />.
+            </summary>
+            <returns>A Duration with the specified unit.</returns>
+        </member>
+        <member name="M:UnitsNet.RelativeHumidity.GetValueInBaseUnit">
+            <summary>
+                Converts the current value + unit to the base unit.
+                This is typically the first step in converting from one unit to another.
+            </summary>
+            <returns>The value in the base unit representation.</returns>
+        </member>
+    </members>
+</doc>
