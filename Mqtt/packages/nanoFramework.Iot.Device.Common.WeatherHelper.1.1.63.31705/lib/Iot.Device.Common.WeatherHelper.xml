@@ -1,0 +1,187 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Iot.Device.Common.WeatherHelper</name>
+    </assembly>
+    <members>
+        <member name="T:Iot.Device.Common.WeatherHelper">
+            <summary>
+            Helpers for weather
+            </summary>
+        </member>
+        <member name="F:Iot.Device.Common.WeatherHelper.MeanSeaLevel">
+            <summary>
+            The mean sea-level pressure (MSLP) is the average atmospheric pressure at mean sea level
+            </summary>
+        </member>
+        <member name="M:Iot.Device.Common.WeatherHelper.CalculateHeatIndex(UnitsNet.Temperature,UnitsNet.RelativeHumidity)">
+            <summary>
+            The heat index (or apparent temperature) is used to measure the amount of discomfort
+            during the summer months when heat and humidity often combine to make it feel hotter
+            than it actually is. The heat index is usually used for afternoon high temperatures.
+            </summary>
+            <param name="airTemperature">The dry air temperature</param>
+            <param name="relativeHumidity">The relative humidity (RH)</param>
+            <returns>The heat index, also known as the apparent temperature</returns>
+        </member>
+        <member name="M:Iot.Device.Common.WeatherHelper.CalculateSaturatedVaporPressureOverWater(UnitsNet.Temperature)">
+            <summary>
+            Calculates the saturated vapor pressure for a given air temperature over water.
+            The formula used is valid for temperatures between -100°C and +100°C.
+            </summary>
+            <param name="airTemperature">The dry air temperature</param>
+            <returns>The saturated vapor pressure</returns>
+            <remarks>
+            From https://de.wikibooks.org/wiki/Tabellensammlung_Chemie/_Stoffdaten_Wasser, after D. Sonntag (1982)
+            </remarks>
+        </member>
+        <member name="M:Iot.Device.Common.WeatherHelper.CalculateSaturatedVaporPressureOverIce(UnitsNet.Temperature)">
+            <summary>
+            Calculates the saturated vapor pressure for a given air temperature over ice.
+            The formula used is valid for temperatures between -100°C and +0°C.
+            </summary>
+            <param name="airTemperature">The dry air temperature</param>
+            <returns>The saturated vapor pressure</returns>
+            <remarks>
+            From https://de.wikibooks.org/wiki/Tabellensammlung_Chemie/_Stoffdaten_Wasser, after D. Sonntag (1982)
+            </remarks>
+        </member>
+        <member name="M:Iot.Device.Common.WeatherHelper.CalculateActualVaporPressure(UnitsNet.Temperature,UnitsNet.RelativeHumidity)">
+            <summary>
+            Calculates the actual vapor pressure.
+            </summary>
+            <param name="airTemperature">The dry air temperature</param>
+            <param name="relativeHumidity">The relative humidity (RH)</param>
+            <returns>The actual vapor pressure</returns>
+        </member>
+        <member name="M:Iot.Device.Common.WeatherHelper.CalculateDewPoint(UnitsNet.Temperature,UnitsNet.RelativeHumidity)">
+            <summary>
+            Calculates the dew point.
+            </summary>
+            <param name="airTemperature">The dry air temperature</param>
+            <param name="relativeHumidity">The relative humidity (RH)</param>
+            <returns>The dew point</returns>
+            <remarks>
+            Source https://en.wikipedia.org/wiki/Dew_point
+            </remarks>
+        </member>
+        <member name="M:Iot.Device.Common.WeatherHelper.CalculateAltitude(UnitsNet.Pressure,UnitsNet.Pressure,UnitsNet.Temperature)">
+            <summary>
+            Calculates the altitude in meters from the given pressure, sea-level pressure and air temperature
+            </summary>
+            <param name="pressure">The pressure at the point for which altitude is being calculated</param>
+            <param name="seaLevelPressure">The sea-level pressure</param>
+            <param name="airTemperature">The dry air temperature at the point for which altitude is being calculated</param>
+            <returns>The altitude</returns>
+        </member>
+        <member name="M:Iot.Device.Common.WeatherHelper.CalculateAltitude(UnitsNet.Pressure,UnitsNet.Temperature)">
+            <summary>
+            Calculates the altitude in meters from the given pressure and air temperature. Assumes mean sea-level pressure.
+            </summary>
+            <param name="pressure">The pressure at the point for which altitude is being calculated</param>
+            <param name="airTemperature">The dry air temperature at the point for which altitude is being calculated</param>
+            <returns>The altitude</returns>
+        </member>
+        <member name="M:Iot.Device.Common.WeatherHelper.CalculateAltitude(UnitsNet.Pressure,UnitsNet.Pressure)">
+            <summary>
+            Calculates the altitude in meters from the given pressure and sea-level pressure. Assumes temperature of 15C.
+            </summary>
+            <param name="pressure">The pressure at the point for which altitude is being calculated</param>
+            <param name="seaLevelPressure">The sea-level pressure</param>
+            <returns>The altitude</returns>
+        </member>
+        <member name="M:Iot.Device.Common.WeatherHelper.CalculateAltitude(UnitsNet.Pressure)">
+            <summary>
+            Calculates the altitude in meters from the given pressure. Assumes mean sea-level pressure and temperature of 15C.
+            </summary>
+            <param name="pressure">The pressure at the point for which altitude is being calculated</param>
+            <returns>The altitude</returns>
+        </member>
+        <member name="M:Iot.Device.Common.WeatherHelper.CalculateSeaLevelPressure(UnitsNet.Pressure,UnitsNet.Length,UnitsNet.Temperature)">
+            <summary>
+            Calculates the approximate sea-level pressure from given absolute pressure, altitude and air temperature.
+            </summary>
+            <param name="pressure">The air pressure at the point of measurement</param>
+            <param name="altitude">The altitude at the point of the measurement</param>
+            <param name="airTemperature">The air temperature</param>
+            <returns>The estimated absolute sea-level pressure</returns>
+            <remarks><see cref="M:Iot.Device.Common.WeatherHelper.CalculatePressure(UnitsNet.Pressure,UnitsNet.Length,UnitsNet.Temperature)"/> solved for sea level pressure</remarks>
+        </member>
+        <member name="M:Iot.Device.Common.WeatherHelper.CalculatePressure(UnitsNet.Pressure,UnitsNet.Length,UnitsNet.Temperature)">
+            <summary>
+            Calculates the approximate absolute pressure from given sea-level pressure, altitude and air temperature.
+            </summary>
+            <param name="seaLevelPressure">The sea-level pressure</param>
+            <param name="altitude">The altitude in meters at the point for which pressure is being calculated</param>
+            <param name="airTemperature">The air temperature at the point for which pressure is being calculated</param>
+            <returns>The estimated absolute pressure at the given altitude</returns>
+        </member>
+        <member name="M:Iot.Device.Common.WeatherHelper.CalculateTemperature(UnitsNet.Pressure,UnitsNet.Pressure,UnitsNet.Length)">
+            <summary>
+            Calculates the temperature gradient for the given pressure difference
+            </summary>
+            <param name="pressure">The air pressure at the point for which temperature is being calculated</param>
+            <param name="seaLevelPressure">The sea-level pressure</param>
+            <param name="altitude">The altitude in meters at the point for which temperature is being calculated</param>
+            <returns>The standard temperature at the given altitude, when the given pressure difference is known</returns>
+            <remarks><see cref="M:Iot.Device.Common.WeatherHelper.CalculatePressure(UnitsNet.Pressure,UnitsNet.Length,UnitsNet.Temperature)"/> solved for temperature</remarks>
+        </member>
+        <member name="M:Iot.Device.Common.WeatherHelper.CalculateBarometricPressure(UnitsNet.Pressure,UnitsNet.Temperature,UnitsNet.Length)">
+            <summary>
+            Calculates the barometric pressure from a raw reading, using the reduction formula from the german met service.
+            This is a more complex variant of <see cref="M:Iot.Device.Common.WeatherHelper.CalculateSeaLevelPressure(UnitsNet.Pressure,UnitsNet.Length,UnitsNet.Temperature)"/>. It gives the value that a weather station gives
+            for a particular area and is also used in meteorological charts.
+            <example>
+            You are at 650m over sea and measure a pressure of 948.7 hPa and a temperature of 24.0°C. The met service will show that
+            you are within a high-pressure area of around 1020 hPa.
+            </example>
+            </summary>
+            <param name="measuredPressure">Measured pressure at the observation point</param>
+            <param name="measuredTemperature">Measured temperature at the observation point</param>
+            <param name="measurementAltitude">Height over sea level of the observation point (to be really precise, geopotential heights have
+            to be used above ~750m). Do not use the height obtained by calling <see cref="M:Iot.Device.Common.WeatherHelper.CalculateAltitude(UnitsNet.Pressure)"/>
+            or any of its overloads, since what would use redundant data.</param>
+            <returns>The barometric pressure at the point of observation</returns>
+            <remarks>
+            From https://de.wikipedia.org/wiki/Barometrische_Höhenformel#Anwendungen
+            </remarks>
+        </member>
+        <member name="M:Iot.Device.Common.WeatherHelper.CalculateBarometricPressure(UnitsNet.Pressure,UnitsNet.Temperature,UnitsNet.Pressure,UnitsNet.Length)">
+            <summary>
+            Calculates the barometric pressure from a raw reading, using the reduction formula from the german met service.
+            This is a more complex variant of <see cref="M:Iot.Device.Common.WeatherHelper.CalculateSeaLevelPressure(UnitsNet.Pressure,UnitsNet.Length,UnitsNet.Temperature)"/>. It gives the value that a weather station gives
+            for a particular area and is also used in meteorological charts.
+            <example>
+            You are at 650m over sea and measure a pressure of 948.7 hPa and a temperature of 24.0°C. The met service will show that
+            you are within a high-pressure area of around 1020 hPa.
+            </example>
+            </summary>
+            <param name="measuredPressure">Measured pressure at the observation point</param>
+            <param name="measuredTemperature">Measured temperature at the observation point</param>
+            <param name="vaporPressure">Vapor pressure, meteorologic definition</param>
+            <param name="measurementAltitude">Height over sea level of the observation point (to be really precise, geopotential heights have
+            to be used above ~750m)</param>
+            <returns>The barometric pressure at the point of observation</returns>
+            <remarks>
+            From https://de.wikipedia.org/wiki/Barometrische_Höhenformel#Anwendungen
+            </remarks>
+        </member>
+        <member name="M:Iot.Device.Common.WeatherHelper.CalculateBarometricPressure(UnitsNet.Pressure,UnitsNet.Temperature,UnitsNet.Length,UnitsNet.RelativeHumidity)">
+            <summary>
+            Calculates the barometric pressure from a raw reading, using the reduction formula from the german met service.
+            This is a more complex variant of <see cref="M:Iot.Device.Common.WeatherHelper.CalculateSeaLevelPressure(UnitsNet.Pressure,UnitsNet.Length,UnitsNet.Temperature)"/>. It gives the value that a weather station gives
+            for a particular area and is also used in meteorological charts.
+            Use this method if you also have the relative humidity.
+            </summary>
+            <param name="measuredPressure">Measured pressure at the observation point</param>
+            <param name="measuredTemperature">Measured temperature at the observation point</param>
+            <param name="measurementAltitude">Height over sea level of the observation point (to be really precise, geopotential heights have
+            to be used above ~750m)</param>
+            <param name="relativeHumidity">Relative humidity at point of measurement</param>
+            <returns>The barometric pressure at the point of observation</returns>
+            <remarks>
+            From https://de.wikipedia.org/wiki/Barometrische_Höhenformel#Anwendungen
+            </remarks>
+        </member>
+    </members>
+</doc>
