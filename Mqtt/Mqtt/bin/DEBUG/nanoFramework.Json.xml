@@ -1,0 +1,128 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>nanoFramework.Json</name>
+    </assembly>
+    <members>
+        <member name="T:nanoFramework.json.JsonSerializer">
+            <summary>
+            Initializes a new instance of the <see cref="T:nanoFramework.json.JsonSerializer"/> class.
+            </summary>
+        </member>
+        <member name="M:nanoFramework.json.JsonSerializer.SerializeObject(System.Object,System.Boolean)">
+            <summary>
+            Convert an object to a JSON string.
+            </summary>
+            <param name="o">The value to convert. Supported types are: <see cref="T:System.Boolean"/>, <see cref="T:System.String"/>, <see cref="T:System.Byte"/>, <see cref="T:System.UInt16"/>, <see cref="T:System.Int16"/>, <see cref="T:System.UInt32"/>,  <see cref="T:System.Int32"/>, <see cref="T:System.Single"/>, <see cref="T:System.Double"/>, <see cref="T:System.Array"/>, <see cref="T:System.Collections.IDictionary"/>, <see cref="T:System.Collections.IEnumerable"/>, <see cref="T:System.Guid"/>, <see cref="T:System.DateTime"/>, <see cref="T:System.TimeSpan"/>, <see cref="T:System.Collections.DictionaryEntry"/>, <see cref="T:System.Object"/> and <see langword="null"/>.</param>
+            <returns>The JSON object as a string or null when the value type is not supported.</returns>
+            <remarks>For objects, only internal properties with getters are converted.</remarks>
+        </member>
+        <member name="M:nanoFramework.json.JsonSerializer.SerializeIEnumerable(System.Collections.IEnumerable)">
+            <summary>
+            Convert an IEnumerable to a JSON string.
+            </summary>
+            <param name="enumerable">The value to convert.</param>
+            <returns>The JSON object as a string or null when the value type is not supported.</returns>
+        </member>
+        <member name="M:nanoFramework.json.JsonSerializer.SerializeIDictionary(System.Collections.IDictionary)">
+            <summary>
+            Convert an IDictionary to a JSON string.
+            </summary>
+            <param name="dictionary">The value to convert.</param>
+            <returns>The JSON object as a string or null when the value type is not supported.</returns>
+        </member>
+        <member name="M:nanoFramework.json.JsonSerializer.SerializeString(System.String)">
+            <summary>
+            Safely serialize a String into a JSON string value, escaping all backslash and quote characters.
+            </summary>
+            <param name="str">The string to serialize.</param>
+            <returns>The serialized JSON string.</returns>
+        </member>
+        <member name="T:nanoFramework.Json.SerializationException">
+            <summary>
+            Exception thrown when there is an problem with a serialization operation. 
+            Check the comment from where the exception has been throw to learn the cause.
+            </summary>
+        </member>
+        <member name="T:nanoFramework.Json.DeserializationException">
+            <summary>
+            Exception thrown when there is an problem with a deserialization operation. 
+            Check the comment from where the exception has been throw to learn the cause.
+            </summary>
+        </member>
+        <member name="T:nanoFramework.Json.JsonConvert">
+            <summary>
+            Provides methods for converting between .NET types and JSON types.
+            </summary>
+        </member>
+        <member name="M:nanoFramework.Json.JsonConvert.SerializeObject(System.Object)">
+            <summary>
+            Convert an object to a JSON string.
+            </summary>
+            <param name="oSource">The value to convert. Supported types are: Boolean, String, Byte, (U)Int16, (U)Int32, Float, Double, Decimal, Array, IDictionary, IEnumerable, Guid, Datetime, DictionaryEntry, Object and null.</param>
+            <returns>The JSON object as a string or null when the value type is not supported.</returns>
+            <remarks>For objects, only public properties with getters are converted.</remarks>
+        </member>
+        <member name="M:nanoFramework.Json.JsonConvert.DeserializeObject(System.String,System.Type)">
+            <summary>
+            Deserializes a Json string into an object.
+            </summary>
+            <param name="sourceString"></param>
+            <param name="type">The object type to convert to</param>
+            <returns></returns>
+        </member>
+        <member name="M:nanoFramework.Json.JsonConvert.DeserializeObject(System.IO.Stream,System.Type)">
+            <summary>
+            Deserializes a Json string into an object.
+            </summary>
+            <param name="stream"></param>
+            <param name="type">The object type to convert to</param>
+            <returns></returns>
+        </member>
+        <member name="M:nanoFramework.Json.JsonConvert.DeserializeObject(System.IO.StreamReader,System.Type)">
+            <summary>
+            Deserializes a Json string into an object.
+            </summary>
+            <param name="dr"></param>
+            <param name="type">The object type to convert to</param>
+            <returns></returns>
+        </member>
+        <member name="M:nanoFramework.Json.DateTimeExtensions.FromiCalendar(System.String)">
+            <summary>
+            Converts a vCal or iCal date string into a DateTime object.
+            </summary>
+            <param name="iCalendar"></param>
+            <returns></returns>
+        </member>
+        <member name="M:nanoFramework.Json.DateTimeExtensions.ToIso8601(System.DateTime)">
+            <summary>
+            Converts a DateTime object into an ISO 8601 string.  This version
+            always returns the string in UTC format.
+            </summary>
+            <param name="dt"></param>
+            <returns></returns>
+        </member>
+        <member name="M:nanoFramework.Json.DateTimeExtensions.IsNumeric(System.String)">
+            <summary>
+            Returns true if the given string contains only numeric characters.
+            </summary>
+            <param name="str"></param>
+            <returns></returns>
+        </member>
+        <member name="M:nanoFramework.Json.DateTimeExtensions.FromASPNetAjax(System.String)">
+            <summary>
+            Converts an ASP.NET Ajaz JSON string to DateTime
+            </summary>
+            <param name="ajax"></param>
+            <returns></returns>
+        </member>
+        <member name="M:nanoFramework.Json.TimeSpanExtensions.TryConvertFromString(System.String,System.TimeSpan@)">
+            <summary>
+            Try converting a string value to a <see cref="T:System.TimeSpan"/>.
+            </summary>
+            <param name="value"><see cref="T:System.String"/> to convert.</param>
+            <param name="timeSpan"><see cref="T:System.TimeSpan"/> converted from <paramref name="value"/>.</param>
+            <returns><see langword="true"/> if conversion was successful. <see langword="false"/> otherwise.</returns>
+        </member>
+    </members>
+</doc>

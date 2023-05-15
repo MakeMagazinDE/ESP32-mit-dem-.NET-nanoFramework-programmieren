@@ -1,0 +1,1287 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Iot.Device.Bmxx80</name>
+    </assembly>
+    <members>
+        <member name="T:Iot.Device.Bmxx80.Bme280">
+            <summary>
+            Represents a BME280 temperature, barometric pressure and humidity sensor.
+            </summary>
+        </member>
+        <member name="F:Iot.Device.Bmxx80.Bme280.DeviceId">
+            <summary>
+            The expected chip ID of the BME280.
+            </summary>
+        </member>
+        <member name="F:Iot.Device.Bmxx80.Bme280._bme280Calibration">
+            <summary>
+            Calibration data for the <see cref="T:Iot.Device.Bmxx80.Bme680"/>.
+            </summary>
+        </member>
+        <member name="M:Iot.Device.Bmxx80.Bme280.#ctor(System.Device.I2c.I2cDevice)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Iot.Device.Bmxx80.Bme280"/> class.
+            </summary>
+            <param name="i2cDevice">The <see cref="T:System.Device.I2c.I2cDevice"/> to create with.</param>
+        </member>
+        <member name="P:Iot.Device.Bmxx80.Bme280.HumiditySampling">
+            <summary>
+            Gets or sets the humidity sampling.
+            </summary>
+            <exception cref="T:System.ArgumentOutOfRangeException">Thrown when the <see cref="T:Iot.Device.Bmxx80.Sampling"/> is set to an undefined mode.</exception>
+        </member>
+        <member name="M:Iot.Device.Bmxx80.Bme280.TryReadHumidity(UnitsNet.RelativeHumidity@)">
+            <summary>
+            Reads the humidity. A return value indicates whether the reading succeeded.
+            </summary>
+            <param name="humidity">
+            Contains the measured humidity as %rH if the <see cref="P:Iot.Device.Bmxx80.Bme280.HumiditySampling"/> was not set to <see cref="F:Iot.Device.Bmxx80.Sampling.Skipped"/>.
+            Contains an undefined value if the return value is false.
+            </param>
+            <returns><code>true</code> if measurement was not skipped, otherwise <code>false</code>.</returns>
+        </member>
+        <member name="M:Iot.Device.Bmxx80.Bme280.GetMeasurementDuration">
+            <summary>
+            Gets the required time in ms to perform a measurement with the current sampling modes.
+            </summary>
+            <returns>The time it takes for the chip to read data in milliseconds rounded up.</returns>
+        </member>
+        <member name="M:Iot.Device.Bmxx80.Bme280.Read">
+            <summary>
+            Performs a synchronous reading.
+            </summary>
+            <returns><see cref="T:Iot.Device.Bmxx80.ReadResult.Bme280ReadResult"/></returns>
+        </member>
+        <member name="M:Iot.Device.Bmxx80.Bme280.SetDefaultConfiguration">
+            <summary>
+            Sets the default configuration for the sensor.
+            </summary>
+        </member>
+        <member name="M:Iot.Device.Bmxx80.Bme280.CompensateHumidity(System.Int32)">
+            <summary>
+            Compensates the humidity.
+            </summary>
+            <param name="adcHumidity">The humidity value read from the device.</param>
+            <returns>The relative humidity.</returns>
+        </member>
+        <member name="T:Iot.Device.Bmxx80.Bme680">
+            <summary>
+            Represents a BME680 temperature, pressure, relative humidity and VOC gas sensor.
+            </summary>
+        </member>
+        <member name="F:Iot.Device.Bmxx80.Bme680.DefaultI2cAddress">
+            <summary>
+            Default I2C bus address.
+            </summary>
+        </member>
+        <member name="F:Iot.Device.Bmxx80.Bme680.SecondaryI2cAddress">
+            <summary>
+            Secondary I2C bus address.
+            </summary>
+        </member>
+        <member name="F:Iot.Device.Bmxx80.Bme680.DeviceId">
+            <summary>
+            The expected chip ID of the BME680.
+            </summary>
+        </member>
+        <member name="F:Iot.Device.Bmxx80.Bme680._bme680Calibration">
+            <summary>
+            Calibration data for the <see cref="T:Iot.Device.Bmxx80.Bme680"/>.
+            </summary>
+        </member>
+        <member name="P:Iot.Device.Bmxx80.Bme680.TempCalibrationFactor">
+            <inheritdoc/>
+        </member>
+        <member name="M:Iot.Device.Bmxx80.Bme680.#ctor(System.Device.I2c.I2cDevice,UnitsNet.Temperature)">
+            <summary>
+            Initialize a new instance of the <see cref="T:Iot.Device.Bmxx80.Bme680"/> class.
+            </summary>
+            <param name="i2cDevice">The <see cref="T:System.Device.I2c.I2cDevice"/> to create with.</param>
+            <param name="ambientTemperatureDefault">Assumed ambient temperature for startup. Used for initialization of the gas measurement
+            if the temperature cannot be read during a reset.</param>
+        </member>
+        <member name="M:Iot.Device.Bmxx80.Bme680.#ctor(System.Device.I2c.I2cDevice)">
+            <summary>
+            Initialize a new instance of the <see cref="T:Iot.Device.Bmxx80.Bme680"/> class.
+            </summary>
+            <param name="i2cDevice">The <see cref="T:System.Device.I2c.I2cDevice"/> to create with.</param>
+        </member>
+        <member name="P:Iot.Device.Bmxx80.Bme680.HumiditySampling">
+            <summary>
+            Gets or sets the humidity sampling.
+            </summary>
+            <exception cref="T:System.ArgumentOutOfRangeException">Thrown when the <see cref="T:Iot.Device.Bmxx80.Sampling"/> is set to an undefined mode.</exception>
+        </member>
+        <member name="P:Iot.Device.Bmxx80.Bme680.HeaterProfile">
+            <summary>
+            Gets or sets the heater profile to be used for measurements.
+            Current heater profile is only set if the chosen profile is configured.
+            </summary>
+            <exception cref="T:System.ArgumentOutOfRangeException">Thrown when the <see cref="T:Iot.Device.Bmxx80.Bme680HeaterProfile"/> is set to an undefined profile.</exception>
+        </member>
+        <member name="P:Iot.Device.Bmxx80.Bme680.FilterMode">
+            <summary>
+            Gets or sets the filtering mode to be used for measurements.
+            </summary>
+            <exception cref="T:System.ArgumentOutOfRangeException">Thrown when the <see cref="T:Iot.Device.Bmxx80.FilteringMode.Bme680FilteringMode"/> is set to an undefined mode.</exception>
+        </member>
+        <member name="P:Iot.Device.Bmxx80.Bme680.HeaterIsEnabled">
+            <summary>
+            Gets or sets whether the heater is enabled.
+            </summary>
+        </member>
+        <member name="P:Iot.Device.Bmxx80.Bme680.GasConversionIsEnabled">
+            <summary>
+            Gets or sets whether gas conversions are enabled.
+            </summary>
+        </member>
+        <member name="M:Iot.Device.Bmxx80.Bme680.ReadNewDataIsAvailable">
+            <summary>
+            Reads whether new data is available.
+            </summary>
+        </member>
+        <member name="M:Iot.Device.Bmxx80.Bme680.ReadGasMeasurementInProcess">
+            <summary>
+            Reads whether a gas measurement is in process.
+            </summary>
+        </member>
+        <member name="M:Iot.Device.Bmxx80.Bme680.ReadMeasurementInProcess">
+            <summary>
+            Reads whether a measurement of any kind is in process.
+            </summary>
+        </member>
+        <member name="M:Iot.Device.Bmxx80.Bme680.ReadHeaterIsStable">
+            <summary>
+            Reads whether the target heater temperature is reached.
+            </summary>
+        </member>
+        <member name="M:Iot.Device.Bmxx80.Bme680.SetPowerMode(Iot.Device.Bmxx80.PowerMode.Bme680PowerMode)">
+            <summary>
+            Sets the power mode to the given mode
+            </summary>
+            <param name="powerMode">The <see cref="T:Iot.Device.Bmxx80.PowerMode.Bme680PowerMode"/> to set.</param>
+            <exception cref="T:System.ArgumentOutOfRangeException">Thrown when the power mode does not match a defined mode in <see cref="T:Iot.Device.Bmxx80.PowerMode.Bme680PowerMode"/>.</exception>
+        </member>
+        <member name="M:Iot.Device.Bmxx80.Bme680.ConfigureHeatingProfile(Iot.Device.Bmxx80.Bme680HeaterProfile,UnitsNet.Temperature,UnitsNet.Duration,UnitsNet.Temperature)">
+            <summary>
+            Configures a heater profile, making it ready for use.
+            </summary>
+            <param name="profile">The <see cref="T:Iot.Device.Bmxx80.Bme680HeaterProfile"/> to configure.</param>
+            <param name="targetTemperature">The target temperature. Ranging from 0-400.</param>
+            <param name="duration">The measurement durations. Ranging from 0-4032ms.</param>
+            <param name="ambientTemperature">The ambient temperature.</param>
+            <exception cref="T:System.ArgumentOutOfRangeException">Thrown when the heating profile does not match a defined profile in <see cref="T:Iot.Device.Bmxx80.Bme680HeaterProfile"/>.</exception>
+        </member>
+        <member name="M:Iot.Device.Bmxx80.Bme680.ReadPowerMode">
+            <summary>
+            Read the <see cref="T:Iot.Device.Bmxx80.PowerMode.Bme680PowerMode"/> state.
+            </summary>
+            <returns>The current <see cref="T:Iot.Device.Bmxx80.PowerMode.Bme680PowerMode"/>.</returns>
+        </member>
+        <member name="M:Iot.Device.Bmxx80.Bme680.GetMeasurementDuration(Iot.Device.Bmxx80.Bme680HeaterProfile)">
+            <summary>
+            Gets the required time in ms to perform a measurement. The duration of the gas
+            measurement is not considered if <see cref="P:Iot.Device.Bmxx80.Bme680.GasConversionIsEnabled"/> is set to false
+            or the chosen <see cref="T:Iot.Device.Bmxx80.Bme680HeaterProfile"/> is not configured.
+            The precision of this duration is within 1ms of the actual measurement time.
+            </summary>
+            <param name="profile">The used <see cref="T:Iot.Device.Bmxx80.Bme680HeaterProfile"/>. </param>
+            <returns></returns>
+        </member>
+        <member name="M:Iot.Device.Bmxx80.Bme680.Read">
+            <summary>
+            Performs a synchronous reading.
+            </summary>
+            <returns><see cref="T:Iot.Device.Bmxx80.ReadResult.Bme680ReadResult"/></returns>
+        </member>
+        <member name="M:Iot.Device.Bmxx80.Bme680.TryReadHumidity(UnitsNet.RelativeHumidity@)">
+            <summary>
+            Reads the humidity. A return value indicates whether the reading succeeded.
+            </summary>
+            <param name="humidity">
+            Contains the measured humidity as %rH if the <see cref="P:Iot.Device.Bmxx80.Bme680.HumiditySampling"/> was not set to <see cref="F:Iot.Device.Bmxx80.Sampling.Skipped"/>.
+            Contains <see cref="F:System.Double.NaN"/> otherwise.
+            </param>
+            <returns><code>true</code> if measurement was not skipped, otherwise <code>false</code>.</returns>
+        </member>
+        <member name="M:Iot.Device.Bmxx80.Bme680.TryReadPressure(UnitsNet.Pressure@)">
+            <summary>
+            Reads the pressure. A return value indicates whether the reading succeeded.
+            </summary>
+            <param name="pressure">
+            Contains the measured pressure if the <see cref="P:Iot.Device.Bmxx80.Bmxx80Base.PressureSampling"/> was not set to <see cref="F:Iot.Device.Bmxx80.Sampling.Skipped"/>.
+            Contains <see cref="F:System.Double.NaN"/> otherwise.
+            </param>
+            <returns><code>true</code> if measurement was not skipped, otherwise <code>false</code>.</returns>
+        </member>
+        <member name="M:Iot.Device.Bmxx80.Bme680.TryReadTemperature(UnitsNet.Temperature@)">
+            <summary>
+            Reads the temperature. A return value indicates whether the reading succeeded.
+            </summary>
+            <param name="temperature">
+            Contains the measured temperature if the <see cref="P:Iot.Device.Bmxx80.Bmxx80Base.TemperatureSampling"/> was not set to <see cref="F:Iot.Device.Bmxx80.Sampling.Skipped"/>.
+            Contains <see cref="F:System.Double.NaN"/> otherwise.
+            </param>
+            <returns><code>true</code> if measurement was not skipped, otherwise <code>false</code>.</returns>
+        </member>
+        <member name="M:Iot.Device.Bmxx80.Bme680.TryReadGasResistance(UnitsNet.ElectricResistance@)">
+            <summary>
+            Reads the gas resistance. A return value indicates whether the reading succeeded.
+            </summary>
+            <param name="gasResistance">
+            Contains the measured gas resistance if the heater module reached the target temperature and
+            the measurement was valid. Undefined otherwise.
+            </param>
+            <returns><code>true</code> if measurement was not skipped, otherwise <code>false</code>.</returns>
+        </member>
+        <member name="M:Iot.Device.Bmxx80.Bme680.SetDefaultConfiguration">
+            <summary>
+            Sets the default configuration for the sensor.
+            </summary>
+        </member>
+        <member name="M:Iot.Device.Bmxx80.Bme680.CompensateHumidity(System.Int32)">
+            <summary>
+            Compensates the humidity.
+            </summary>
+            <param name="adcHumidity">The humidity value read from the device.</param>
+            <returns>The percentage relative humidity.</returns>
+        </member>
+        <member name="M:Iot.Device.Bmxx80.Bme680.CompensatePressure(System.Int64)">
+            <summary>
+            Compensates the pressure.
+            </summary>
+            <param name="adcPressure">The pressure value read from the device.</param>
+            <returns>The measured pressure.</returns>
+        </member>
+        <member name="T:Iot.Device.Bmxx80.Bme680HeaterProfile">
+            <summary>
+            10 addressable heater profiles stored on the Bme680.
+            </summary>
+        </member>
+        <member name="F:Iot.Device.Bmxx80.Bme680HeaterProfile.Profile1">
+            <summary>
+            Heater Profile 1.
+            </summary>
+        </member>
+        <member name="F:Iot.Device.Bmxx80.Bme680HeaterProfile.Profile2">
+            <summary>
+            Heater Profile 2.
+            </summary>
+        </member>
+        <member name="F:Iot.Device.Bmxx80.Bme680HeaterProfile.Profile3">
+            <summary>
+            Heater Profile 3.
+            </summary>
+        </member>
+        <member name="F:Iot.Device.Bmxx80.Bme680HeaterProfile.Profile4">
+            <summary>
+            Heater Profile 4.
+            </summary>
+        </member>
+        <member name="F:Iot.Device.Bmxx80.Bme680HeaterProfile.Profile5">
+            <summary>
+            Heater Profile 5.
+            </summary>
+        </member>
+        <member name="F:Iot.Device.Bmxx80.Bme680HeaterProfile.Profile6">
+            <summary>
+            Heater Profile 6.
+            </summary>
+        </member>
+        <member name="F:Iot.Device.Bmxx80.Bme680HeaterProfile.Profile7">
+            <summary>
+            Heater Profile 7.
+            </summary>
+        </member>
+        <member name="F:Iot.Device.Bmxx80.Bme680HeaterProfile.Profile8">
+            <summary>
+            Heater Profile 8.
+            </summary>
+        </member>
+        <member name="F:Iot.Device.Bmxx80.Bme680HeaterProfile.Profile9">
+            <summary>
+            Heater Profile 9.
+            </summary>
+        </member>
+        <member name="F:Iot.Device.Bmxx80.Bme680HeaterProfile.Profile10">
+            <summary>
+            Heater Profile 10.
+            </summary>
+        </member>
+        <member name="T:Iot.Device.Bmxx80.Bme680HeaterProfileConfig">
+            <summary>
+            The heater profile configuration saved on the device.
+            </summary>
+        </member>
+        <member name="P:Iot.Device.Bmxx80.Bme680HeaterProfileConfig.HeaterProfile">
+            <summary>
+            The chosen heater profile slot, ranging from 0-9.
+            </summary>
+        </member>
+        <member name="P:Iot.Device.Bmxx80.Bme680HeaterProfileConfig.HeaterResistance">
+            <summary>
+            The heater resistance.
+            </summary>
+        </member>
+        <member name="P:Iot.Device.Bmxx80.Bme680HeaterProfileConfig.HeaterDuration">
+            <summary>
+            The heater duration
+            </summary>
+        </member>
+        <member name="M:Iot.Device.Bmxx80.Bme680HeaterProfileConfig.#ctor(Iot.Device.Bmxx80.Bme680HeaterProfile,System.UInt16,UnitsNet.Duration)">
+            <summary>
+            Creates a new instance of <see cref="T:Iot.Device.Bmxx80.Bme680HeaterProfileConfig"/>.
+            </summary>
+            <param name="profile">The used heater profile.</param>
+            <param name="heaterResistance">The heater resistance in Ohm.</param>
+            <param name="heaterDuration">The heating duration.</param>
+            <exception cref="T:System.ArgumentOutOfRangeException">Unknown profile setting used</exception>
+        </member>
+        <member name="T:Iot.Device.Bmxx80.Bmp280">
+            <summary>
+            Represents a BME280 temperature and barometric pressure sensor.
+            </summary>
+        </member>
+        <member name="F:Iot.Device.Bmxx80.Bmp280.DeviceId">
+            <summary>
+            The expected chip ID of the BMP280.
+            </summary>
+        </member>
+        <member name="M:Iot.Device.Bmxx80.Bmp280.#ctor(System.Device.I2c.I2cDevice)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Iot.Device.Bmxx80.Bmp280"/> class.
+            </summary>
+            <param name="i2cDevice">The <see cref="T:System.Device.I2c.I2cDevice"/> to create with.</param>
+        </member>
+        <member name="M:Iot.Device.Bmxx80.Bmp280.Read">
+            <summary>
+            Performs a synchronous reading.
+            </summary>
+            <returns><see cref="T:Iot.Device.Bmxx80.ReadResult.Bmp280ReadResult"/></returns>
+        </member>
+        <member name="T:Iot.Device.Bmxx80.Bmx280Base">
+            <summary>
+            Represents the core functionality of the Bmx280 family.
+            </summary>
+        </member>
+        <member name="F:Iot.Device.Bmxx80.Bmx280Base.DefaultI2cAddress">
+            <summary>
+            Default I2C bus address.
+            </summary>
+        </member>
+        <member name="F:Iot.Device.Bmxx80.Bmx280Base.SecondaryI2cAddress">
+            <summary>
+            Secondary I2C bus address.
+            </summary>
+        </member>
+        <member name="F:Iot.Device.Bmxx80.Bmx280Base.s_osToMeasCycles">
+            <summary>
+            Converts oversampling to needed measurement cycles for that oversampling.
+            </summary>
+        </member>
+        <member name="M:Iot.Device.Bmxx80.Bmx280Base.#ctor(System.Byte,System.Device.I2c.I2cDevice)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Iot.Device.Bmxx80.Bmx280Base"/> class.
+            </summary>
+            <param name="deviceId">The ID of the device.</param>
+            <param name="i2cDevice">The <see cref="T:System.Device.I2c.I2cDevice"/> to create with.</param>
+        </member>
+        <member name="P:Iot.Device.Bmxx80.Bmx280Base.FilterMode">
+            <summary>
+            Gets or sets the IIR filter mode.
+            </summary>
+            <exception cref="T:System.ArgumentOutOfRangeException">Thrown when the <see cref="T:Iot.Device.Bmxx80.FilteringMode.Bmx280FilteringMode"/> is set to an undefined mode.</exception>
+        </member>
+        <member name="P:Iot.Device.Bmxx80.Bmx280Base.StandbyTime">
+            <summary>
+            Gets or sets the standby time between two consecutive measurements.
+            </summary>
+            <exception cref="T:System.ArgumentOutOfRangeException">Thrown when the <see cref="T:Iot.Device.Bmxx80.StandbyTime"/> is set to an undefined mode.</exception>
+        </member>
+        <member name="M:Iot.Device.Bmxx80.Bmx280Base.TryReadTemperature(UnitsNet.Temperature@)">
+            <summary>
+            Reads the temperature. A return value indicates whether the reading succeeded.
+            </summary>
+            <param name="temperature">
+            Contains the measured temperature if the <see cref="P:Iot.Device.Bmxx80.Bmxx80Base.TemperatureSampling"/> was not set to <see cref="F:Iot.Device.Bmxx80.Sampling.Skipped"/>.
+            Contains <see cref="F:System.Double.NaN"/> otherwise.
+            </param>
+            <returns><code>true</code> if measurement was not skipped, otherwise <code>false</code>.</returns>
+        </member>
+        <member name="M:Iot.Device.Bmxx80.Bmx280Base.ReadPowerMode">
+            <summary>
+            Read the <see cref="T:Iot.Device.Bmxx80.PowerMode.Bmx280PowerMode"/> state.
+            </summary>
+            <returns>The current <see cref="T:Iot.Device.Bmxx80.PowerMode.Bmx280PowerMode"/>.</returns>
+            <exception cref="T:System.NotImplementedException">Thrown when the power mode does not match a defined mode in <see cref="T:Iot.Device.Bmxx80.PowerMode.Bmx280PowerMode"/>.</exception>
+        </member>
+        <member name="M:Iot.Device.Bmxx80.Bmx280Base.TryReadPressure(UnitsNet.Pressure@)">
+            <summary>
+            Reads the pressure. A return value indicates whether the reading succeeded.
+            </summary>
+            <param name="pressure">
+            Contains the measured pressure in Pa if the <see cref="P:Iot.Device.Bmxx80.Bmxx80Base.PressureSampling"/> was not set to <see cref="F:Iot.Device.Bmxx80.Sampling.Skipped"/>.
+            Contains <see cref="F:System.Double.NaN"/> otherwise.
+            </param>
+            <returns><code>true</code> if measurement was not skipped, otherwise <code>false</code>.</returns>
+        </member>
+        <member name="M:Iot.Device.Bmxx80.Bmx280Base.TryReadAltitude(UnitsNet.Pressure,UnitsNet.Length@)">
+            <summary>
+            Calculates the altitude in meters from the specified sea-level pressure(in hPa).
+            </summary>
+            <param name="seaLevelPressure">Sea-level pressure</param>
+            <param name="altitude">
+            Contains the calculated metres above sea-level if the <see cref="P:Iot.Device.Bmxx80.Bmxx80Base.PressureSampling"/> was not set to <see cref="F:Iot.Device.Bmxx80.Sampling.Skipped"/>.
+            Contains <see cref="F:System.Double.NaN"/> otherwise.
+            </param>
+            <returns><code>true</code> if pressure measurement was not skipped, otherwise <code>false</code>.</returns>
+        </member>
+        <member name="M:Iot.Device.Bmxx80.Bmx280Base.TryReadAltitude(UnitsNet.Length@)">
+            <summary>
+            Calculates the altitude in meters from the mean sea-level pressure.
+            </summary>
+            <param name="altitude">
+            Contains the calculated metres above sea-level if the <see cref="P:Iot.Device.Bmxx80.Bmxx80Base.PressureSampling"/> was not set to <see cref="F:Iot.Device.Bmxx80.Sampling.Skipped"/>.
+            Contains <see cref="F:System.Double.NaN"/> otherwise.
+            </param>
+            <returns><code>true</code> if pressure measurement was not skipped, otherwise <code>false</code>.</returns>
+        </member>
+        <member name="M:Iot.Device.Bmxx80.Bmx280Base.ReadStatus">
+            <summary>
+            Get the current status of the device.
+            </summary>
+            <returns>The <see cref="T:Iot.Device.Bmxx80.DeviceStatus"/>.</returns>
+        </member>
+        <member name="M:Iot.Device.Bmxx80.Bmx280Base.SetPowerMode(Iot.Device.Bmxx80.PowerMode.Bmx280PowerMode)">
+            <summary>
+            Sets the power mode to the given mode
+            </summary>
+            <param name="powerMode">The <see cref="T:Iot.Device.Bmxx80.PowerMode.Bmx280PowerMode"/> to set.</param>
+        </member>
+        <member name="M:Iot.Device.Bmxx80.Bmx280Base.GetMeasurementDuration">
+            <summary>
+            Gets the required time in ms to perform a measurement with the current sampling modes.
+            </summary>
+            <returns>The time it takes for the chip to read data in milliseconds rounded up.</returns>
+        </member>
+        <member name="M:Iot.Device.Bmxx80.Bmx280Base.SetDefaultConfiguration">
+            <summary>
+            Sets the default configuration for the sensor.
+            </summary>
+        </member>
+        <member name="M:Iot.Device.Bmxx80.Bmx280Base.TryReadTemperatureCore(UnitsNet.Temperature@)">
+            <summary>
+            Performs a temperature reading.
+            </summary>
+            <returns><see cref="T:UnitsNet.Temperature"/></returns>
+        </member>
+        <member name="M:Iot.Device.Bmxx80.Bmx280Base.TryReadPressureCore(UnitsNet.Pressure@,System.Boolean)">
+            <summary>
+            Performs a pressure reading.
+            </summary>
+            <returns><see cref="T:UnitsNet.Pressure"/></returns>
+        </member>
+        <member name="M:Iot.Device.Bmxx80.Bmx280Base.CompensatePressure(System.Int64)">
+            <summary>
+            Compensates the pressure in Pa, in double format
+            </summary>
+            <param name="adcPressure">The pressure value read from the device.</param>
+            <returns>Pressure as an instance of <see cref="T:UnitsNet.Pressure"/>.</returns>
+        </member>
+        <member name="T:Iot.Device.Bmxx80.Bmxx80Base">
+            <summary>
+            Represents the core functionality of the Bmxx80 family.
+            </summary>
+        </member>
+        <member name="F:Iot.Device.Bmxx80.Bmxx80Base._calibrationData">
+            <summary>
+            Calibration data for the sensor.
+            </summary>
+        </member>
+        <member name="F:Iot.Device.Bmxx80.Bmxx80Base._i2cDevice">
+            <summary>
+            I2C device used to communicate with the device.
+            </summary>
+        </member>
+        <member name="F:Iot.Device.Bmxx80.Bmxx80Base._communicationProtocol">
+            <summary>
+            Chosen communication protocol.
+            </summary>
+        </member>
+        <member name="F:Iot.Device.Bmxx80.Bmxx80Base._controlRegister">
+            <summary>
+            The control register of the sensor.
+            </summary>
+        </member>
+        <member name="T:Iot.Device.Bmxx80.Bmxx80Base.CommunicationProtocol">
+            <summary>
+            Bmxx80 communication protocol.
+            </summary>
+        </member>
+        <member name="F:Iot.Device.Bmxx80.Bmxx80Base.CommunicationProtocol.I2c">
+            <summary>
+            I²C communication protocol.
+            </summary>
+        </member>
+        <member name="P:Iot.Device.Bmxx80.Bmxx80Base.TemperatureFine">
+            <summary>
+            The variable TemperatureFine carries a fine resolution temperature value over to the
+            pressure compensation formula and could be implemented as a global variable.
+            </summary>
+        </member>
+        <member name="P:Iot.Device.Bmxx80.Bmxx80Base.TempCalibrationFactor">
+            <summary>
+            The temperature calibration factor.
+            </summary>
+        </member>
+        <member name="M:Iot.Device.Bmxx80.Bmxx80Base.#ctor(System.Byte,System.Device.I2c.I2cDevice)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Iot.Device.Bmxx80.Bmxx80Base"/> class.
+            </summary>
+            <param name="deviceId">The ID of the device.</param>
+            <param name="i2cDevice">The <see cref="T:System.Device.I2c.I2cDevice"/> to create with.</param>
+            <exception cref="T:System.ArgumentNullException">Thrown when the given <see cref="T:System.Device.I2c.I2cDevice"/> is null.</exception>
+            <exception cref="T:System.IO.IOException">Thrown when the device cannot be found on the bus.</exception>
+        </member>
+        <member name="P:Iot.Device.Bmxx80.Bmxx80Base.PressureSampling">
+            <summary>
+            Gets or sets the pressure sampling.
+            </summary>
+            <exception cref="T:System.ArgumentOutOfRangeException">Thrown when the <see cref="T:Iot.Device.Bmxx80.Sampling"/> is set to an undefined mode.</exception>
+        </member>
+        <member name="P:Iot.Device.Bmxx80.Bmxx80Base.TemperatureSampling">
+            <summary>
+            Gets or sets the temperature sampling.
+            </summary>
+            <exception cref="T:System.ArgumentOutOfRangeException">Thrown when the <see cref="T:Iot.Device.Bmxx80.Sampling"/> is set to an undefined mode.</exception>
+        </member>
+        <member name="M:Iot.Device.Bmxx80.Bmxx80Base.Reset">
+            <summary>
+            When called, the device is reset using the complete power-on-reset procedure.
+            The device will reset to the default configuration.
+            </summary>
+        </member>
+        <member name="M:Iot.Device.Bmxx80.Bmxx80Base.TryReadTemperature(UnitsNet.Temperature@)">
+            <summary>
+            Reads the temperature. A return value indicates whether the reading succeeded.
+            </summary>
+            <param name="temperature">
+            Contains the measured temperature if the <see cref="P:Iot.Device.Bmxx80.Bmxx80Base.TemperatureSampling"/> was not set to <see cref="F:Iot.Device.Bmxx80.Sampling.Skipped"/>.
+            Contains <see cref="F:System.Double.NaN"/> otherwise.
+            </param>
+            <returns><code>true</code> if measurement was not skipped, otherwise <code>false</code>.</returns>
+        </member>
+        <member name="M:Iot.Device.Bmxx80.Bmxx80Base.TryReadPressure(UnitsNet.Pressure@)">
+            <summary>
+            Reads the pressure. A return value indicates whether the reading succeeded.
+            </summary>
+            <param name="pressure">
+            Contains the measured pressure if the <see cref="P:Iot.Device.Bmxx80.Bmxx80Base.PressureSampling"/> was not set to <see cref="F:Iot.Device.Bmxx80.Sampling.Skipped"/>.
+            Contains <see cref="F:System.Double.NaN"/> otherwise.
+            </param>
+            <returns><code>true</code> if measurement was not skipped, otherwise <code>false</code>.</returns>
+        </member>
+        <member name="M:Iot.Device.Bmxx80.Bmxx80Base.CompensateTemperature(System.Int32)">
+            <summary>
+            Compensates the temperature.
+            </summary>
+            <param name="adcTemperature">The temperature value read from the device.</param>
+            <returns>The <see cref="T:UnitsNet.Temperature"/>.</returns>
+        </member>
+        <member name="M:Iot.Device.Bmxx80.Bmxx80Base.Read8BitsFromRegister(System.Byte)">
+            <summary>
+            Reads an 8 bit value from a register.
+            </summary>
+            <param name="register">Register to read from.</param>
+            <returns>Value from register.</returns>
+        </member>
+        <member name="M:Iot.Device.Bmxx80.Bmxx80Base.Read16BitsFromRegister(System.Byte,Iot.Device.Bmxx80.Bmxx80Base.Endianness)">
+            <summary>
+            Reads a 16 bit value over I2C.
+            </summary>
+            <param name="register">Register to read from.</param>
+            <param name="endianness">Interpretation of the bytes (big or little endian).</param>
+            <returns>Value from register.</returns>
+        </member>
+        <member name="M:Iot.Device.Bmxx80.Bmxx80Base.Read24BitsFromRegister(System.Byte,Iot.Device.Bmxx80.Bmxx80Base.Endianness)">
+            <summary>
+            Reads a 24 bit value over I2C.
+            </summary>
+            <param name="register">Register to read from.</param>
+            <param name="endianness">Interpretation of the bytes (big or little endian).</param>
+            <returns>Value from register.</returns>
+        </member>
+        <member name="M:Iot.Device.Bmxx80.Bmxx80Base.ByteToSampling(System.Byte)">
+            <summary>
+            Converts byte to <see cref="T:Iot.Device.Bmxx80.Sampling"/>.
+            </summary>
+            <param name="value">Value to convert.</param>
+            <returns><see cref="T:Iot.Device.Bmxx80.Sampling"/></returns>
+        </member>
+        <member name="M:Iot.Device.Bmxx80.Bmxx80Base.SetDefaultConfiguration">
+            <summary>
+            Sets the default configuration for the sensor.
+            </summary>
+        </member>
+        <member name="T:Iot.Device.Bmxx80.Bmxx80Base.Endianness">
+            <summary>
+            Specifies the Endianness of a device.
+            </summary>
+        </member>
+        <member name="F:Iot.Device.Bmxx80.Bmxx80Base.Endianness.LittleEndian">
+            <summary>
+            Indicates little endian.
+            </summary>
+        </member>
+        <member name="F:Iot.Device.Bmxx80.Bmxx80Base.Endianness.BigEndian">
+            <summary>
+            Indicates big endian.
+            </summary>
+        </member>
+        <member name="M:Iot.Device.Bmxx80.Bmxx80Base.Dispose">
+            <summary>
+            Cleanup.
+            </summary>
+        </member>
+        <member name="M:Iot.Device.Bmxx80.Bmxx80Base.Dispose(System.Boolean)">
+            <summary>
+            Releases the unmanaged resources used by the Bmxx80 and optionally releases the managed resources.
+            </summary>
+            <param name="disposing">True to release both managed and unmanaged resources; false to release only unmanaged resources.</param>
+        </member>
+        <member name="T:Iot.Device.Bmxx80.CalibrationData.Bme680CalibrationData">
+            <summary>
+            Calibration data for the <see cref="T:Iot.Device.Bmxx80.Bme680"/>.
+            </summary>
+        </member>
+        <member name="M:Iot.Device.Bmxx80.CalibrationData.Bme680CalibrationData.ReadFromDevice(Iot.Device.Bmxx80.Bmxx80Base)">
+            <summary>
+            Read coefficient data from device.
+            </summary>
+            <param name="bmxx80Base">The <see cref="T:Iot.Device.Bmxx80.Bmxx80Base"/> to read coefficient data from.</param>
+        </member>
+        <member name="T:Iot.Device.Bmxx80.CalibrationData.Bme280CalibrationData">
+            <summary>
+            Calibration data for the BME280.
+            </summary>
+        </member>
+        <member name="M:Iot.Device.Bmxx80.CalibrationData.Bme280CalibrationData.ReadFromDevice(Iot.Device.Bmxx80.Bmxx80Base)">
+            <summary>
+            Read coefficient data from device.
+            </summary>
+            <param name="bmxx80Base">The <see cref="T:Iot.Device.Bmxx80.Bmxx80Base"/> to read coefficient data from.</param>
+        </member>
+        <member name="T:Iot.Device.Bmxx80.CalibrationData.Bmp280CalibrationData">
+            <summary>
+            Calibration data for the BMP280.
+            </summary>
+        </member>
+        <member name="M:Iot.Device.Bmxx80.CalibrationData.Bmp280CalibrationData.ReadFromDevice(Iot.Device.Bmxx80.Bmxx80Base)">
+            <summary>
+            Read coefficient data from device.
+            </summary>
+            <param name="bmxx80Base">The <see cref="T:Iot.Device.Bmxx80.Bmxx80Base"/> to read coefficient data from.</param>
+        </member>
+        <member name="T:Iot.Device.Bmxx80.CalibrationData.Bmxx80CalibrationData">
+            <summary>
+            Calibration data for the Bmxx80 family.
+            </summary>
+        </member>
+        <member name="M:Iot.Device.Bmxx80.CalibrationData.Bmxx80CalibrationData.ReadFromDevice(Iot.Device.Bmxx80.Bmxx80Base)">
+            <summary>
+            Read coefficient data from device.
+            </summary>
+            <param name="bmxx80Base">The <see cref="T:Iot.Device.Bmxx80.Bmxx80Base"/> to read coefficient data from.</param>
+        </member>
+        <member name="T:Iot.Device.Bmxx80.DeviceStatus">
+            <summary>
+            Indicates the status of the device.
+            </summary>
+        </member>
+        <member name="P:Iot.Device.Bmxx80.DeviceStatus.Measuring">
+            <summary>
+            True whenever a conversion is running and False when the results have been transferred to the data registers.
+            </summary>
+        </member>
+        <member name="P:Iot.Device.Bmxx80.DeviceStatus.ImageUpdating">
+            <summary>
+            True when the NVM data is being copied to images registers and False when the copying is done.
+            The data is copied at power-on-reset and before every conversion.
+            </summary>
+        </member>
+        <member name="T:Iot.Device.Bmxx80.FilteringMode.Bme680FilteringMode">
+            <summary>
+            IIR filter coefficient. The higher the coefficient, the slower the sensors
+            responds to external inputs.
+            </summary>
+        </member>
+        <member name="F:Iot.Device.Bmxx80.FilteringMode.Bme680FilteringMode.C0">
+            <summary>
+            Filter coefficient of 0.
+            </summary>
+        </member>
+        <member name="F:Iot.Device.Bmxx80.FilteringMode.Bme680FilteringMode.C1">
+            <summary>
+            Filter coefficient of 1.
+            </summary>
+        </member>
+        <member name="F:Iot.Device.Bmxx80.FilteringMode.Bme680FilteringMode.C3">
+            <summary>
+            Filter coefficient of 3.
+            </summary>
+        </member>
+        <member name="F:Iot.Device.Bmxx80.FilteringMode.Bme680FilteringMode.C7">
+            <summary>
+            Filter coefficient of 7.
+            </summary>
+        </member>
+        <member name="F:Iot.Device.Bmxx80.FilteringMode.Bme680FilteringMode.C15">
+            <summary>
+            Filter coefficient of 15.
+            </summary>
+        </member>
+        <member name="F:Iot.Device.Bmxx80.FilteringMode.Bme680FilteringMode.C31">
+            <summary>
+            Filter coefficient of 31.
+            </summary>
+        </member>
+        <member name="F:Iot.Device.Bmxx80.FilteringMode.Bme680FilteringMode.C63">
+            <summary>
+            Filter coefficient of 63.
+            </summary>
+        </member>
+        <member name="F:Iot.Device.Bmxx80.FilteringMode.Bme680FilteringMode.C127">
+            <summary>
+            Filter coefficient of 127.
+            </summary>
+        </member>
+        <member name="T:Iot.Device.Bmxx80.FilteringMode.Bmx280FilteringMode">
+             <summary>
+             Bmx280 devices feature an internal IIR filter.
+             </summary>
+             <remarks>
+             This filter effectively reduces the bandwidth of the temperature and pressure output signals
+             and increases the resolution of the pressure and temperature output data to 20 bits.
+            
+             The higher the coefficient, the slower the sensors responds to external inputs.
+            
+             See the data sheet with recommended settings for different scenarios.
+             </remarks>
+        </member>
+        <member name="F:Iot.Device.Bmxx80.FilteringMode.Bmx280FilteringMode.Off">
+            <summary>
+            Filter off.
+            </summary>
+        </member>
+        <member name="F:Iot.Device.Bmxx80.FilteringMode.Bmx280FilteringMode.X2">
+            <summary>
+            Coefficient x2.
+            </summary>
+        </member>
+        <member name="F:Iot.Device.Bmxx80.FilteringMode.Bmx280FilteringMode.X4">
+            <summary>
+            Coefficient x4.
+            </summary>
+        </member>
+        <member name="F:Iot.Device.Bmxx80.FilteringMode.Bmx280FilteringMode.X8">
+            <summary>
+            Coefficient x8.
+            </summary>
+        </member>
+        <member name="F:Iot.Device.Bmxx80.FilteringMode.Bmx280FilteringMode.X16">
+            <summary>
+            Coefficient x16.
+            </summary>
+        </member>
+        <member name="T:Iot.Device.Bmxx80.PowerMode.Bme680PowerMode">
+            <summary>
+            Sensor power mode.
+            </summary>
+            <remarks>
+            Section 3.1 in the datasheet.
+            </remarks>
+        </member>
+        <member name="F:Iot.Device.Bmxx80.PowerMode.Bme680PowerMode.Sleep">
+            <summary>
+            No measurements are performed.
+            </summary>
+            <remarks>
+            Minimal power consumption.
+            </remarks>
+        </member>
+        <member name="F:Iot.Device.Bmxx80.PowerMode.Bme680PowerMode.Forced">
+            <summary>
+            Single TPHG cycle is performed.
+            </summary>
+            <remarks>
+            Sensor automatically returns to sleep mode afterwards.
+            Gas sensor heater only operates during gas measurement.
+            </remarks>
+        </member>
+        <member name="T:Iot.Device.Bmxx80.PowerMode.Bmx280PowerMode">
+            <summary>
+            Sensor power mode.
+            </summary>
+        </member>
+        <member name="F:Iot.Device.Bmxx80.PowerMode.Bmx280PowerMode.Sleep">
+            <summary>
+            No operations, all registers accessible, lowest power mode, selected after startup.
+            </summary>
+        </member>
+        <member name="F:Iot.Device.Bmxx80.PowerMode.Bmx280PowerMode.Forced">
+            <summary>
+            Perform one measurement, store results, and return to sleep mode.
+            </summary>
+        </member>
+        <member name="F:Iot.Device.Bmxx80.PowerMode.Bmx280PowerMode.Normal">
+            <summary>
+            Perpetual cycling of measurements and inactive periods.
+            This interval is determined by the combination of IIR filter and standby time options.
+            </summary>
+        </member>
+        <member name="T:Iot.Device.Bmxx80.ReadResult.Bme280ReadResult">
+            <summary>
+            Contains a measurement result of a Bme280 sensor.
+            </summary>
+        </member>
+        <member name="P:Iot.Device.Bmxx80.ReadResult.Bme280ReadResult.Humidity">
+            <summary>
+            Collected humidity measurement.
+            </summary>
+        </member>
+        <member name="M:Iot.Device.Bmxx80.ReadResult.Bme280ReadResult.#ctor(UnitsNet.Temperature,UnitsNet.Pressure,UnitsNet.RelativeHumidity)">
+            <summary>
+            Initialize a new instance of the <see cref="T:Iot.Device.Bmxx80.ReadResult.Bme280ReadResult"/> class.
+            </summary>
+            <param name="temperature">The <see cref="T:UnitsNet.Temperature"/> measurement.</param>
+            <param name="pressure">The <see cref="T:UnitsNet.Pressure"/> measurement.</param>
+            <param name="humidity">The humidity measurement.</param>
+        </member>
+        <member name="T:Iot.Device.Bmxx80.ReadResult.Bme680ReadResult">
+            <summary>
+            Contains a measurement result of a Bme280 sensor.
+            </summary>
+        </member>
+        <member name="P:Iot.Device.Bmxx80.ReadResult.Bme680ReadResult.GasResistance">
+            <summary>
+            Collected gas resistance measurement. NaN if no measurement was performed.
+            </summary>
+        </member>
+        <member name="M:Iot.Device.Bmxx80.ReadResult.Bme680ReadResult.#ctor(UnitsNet.Temperature,UnitsNet.Pressure,UnitsNet.RelativeHumidity,UnitsNet.ElectricResistance)">
+            <summary>
+            Initialize a new instance of the <see cref="T:Iot.Device.Bmxx80.ReadResult.Bme680ReadResult"/> class.
+            </summary>
+            <param name="temperature">The <see cref="T:UnitsNet.Temperature"/> measurement.</param>
+            <param name="pressure">The <see cref="T:UnitsNet.Pressure"/> measurement.</param>
+            <param name="humidity">The humidity measurement.</param>
+            <param name="gasResistance">The gas resistance measurement.</param>
+        </member>
+        <member name="T:Iot.Device.Bmxx80.ReadResult.Bmp280ReadResult">
+            <summary>
+            Contains a measurement result of a Bmp280 sensor.
+            </summary>
+        </member>
+        <member name="P:Iot.Device.Bmxx80.ReadResult.Bmp280ReadResult.Temperature">
+            <summary>
+            Collected temperature measurement.
+            </summary>
+        </member>
+        <member name="P:Iot.Device.Bmxx80.ReadResult.Bmp280ReadResult.Pressure">
+            <summary>
+            Collected pressure measurement.
+            </summary>
+        </member>
+        <member name="M:Iot.Device.Bmxx80.ReadResult.Bmp280ReadResult.#ctor(UnitsNet.Temperature,UnitsNet.Pressure)">
+            <summary>
+            Initialize a new instance of the <see cref="T:Iot.Device.Bmxx80.ReadResult.Bmp280ReadResult"/> class.
+            </summary>
+            <param name="temperature">The <see cref="P:Iot.Device.Bmxx80.ReadResult.Bmp280ReadResult.Temperature"/> measurement.</param>
+            <param name="pressure">The <see cref="P:Iot.Device.Bmxx80.ReadResult.Bmp280ReadResult.Pressure"/> measurement.</param>
+        </member>
+        <member name="T:Iot.Device.Bmxx80.Register.Bme680Register">
+            <summary>
+            General control registers for the BME680.
+            </summary>
+            <remarks>
+            See section 5.2 Memory map.
+            </remarks>
+        </member>
+        <member name="T:Iot.Device.Bmxx80.Register.Bmx280Register">
+            <summary>
+            Register shared by the Bmx280 family.
+            </summary>
+        </member>
+        <member name="T:Iot.Device.Bmxx80.Register.Bmxx80Register">
+            <summary>
+            Registers shared in the Bmxx80 family.
+            </summary>
+        </member>
+        <member name="T:Iot.Device.Bmxx80.Register.Bme280Register">
+            <summary>
+            General control registers for the BME280.
+            </summary>
+        </member>
+        <member name="T:Iot.Device.Bmxx80.Sampling">
+            <summary>
+            Oversampling settings.
+            </summary>
+            <remarks>
+            Maximum of x2 is recommended for temperature.
+            </remarks>
+        </member>
+        <member name="F:Iot.Device.Bmxx80.Sampling.Skipped">
+            <summary>
+            Skipped (output set to 0x80000).
+            </summary>
+        </member>
+        <member name="F:Iot.Device.Bmxx80.Sampling.UltraLowPower">
+            <summary>
+            Oversampling x1.
+            </summary>
+        </member>
+        <member name="F:Iot.Device.Bmxx80.Sampling.LowPower">
+            <summary>
+            Oversampling x2.
+            </summary>
+        </member>
+        <member name="F:Iot.Device.Bmxx80.Sampling.Standard">
+            <summary>
+            Oversampling x4.
+            </summary>
+        </member>
+        <member name="F:Iot.Device.Bmxx80.Sampling.HighResolution">
+            <summary>
+            Oversampling x8.
+            </summary>
+        </member>
+        <member name="F:Iot.Device.Bmxx80.Sampling.UltraHighResolution">
+            <summary>
+            Oversampling x16.
+            </summary>
+        </member>
+        <member name="T:Iot.Device.Bmxx80.StandbyTime">
+            <summary>
+            Controls the inactive duration in normal mode.
+            </summary>
+        </member>
+        <member name="F:Iot.Device.Bmxx80.StandbyTime.Ms0_5">
+            <summary>
+            0.5 ms.
+            </summary>
+        </member>
+        <member name="F:Iot.Device.Bmxx80.StandbyTime.Ms62_5">
+            <summary>
+            62.5 ms.
+            </summary>
+        </member>
+        <member name="F:Iot.Device.Bmxx80.StandbyTime.Ms125">
+            <summary>
+            125 ms.
+            </summary>
+        </member>
+        <member name="F:Iot.Device.Bmxx80.StandbyTime.Ms250">
+            <summary>
+            250 ms.
+            </summary>
+        </member>
+        <member name="F:Iot.Device.Bmxx80.StandbyTime.Ms500">
+            <summary>
+            500 ms.
+            </summary>
+        </member>
+        <member name="F:Iot.Device.Bmxx80.StandbyTime.Ms1000">
+            <summary>
+            1,000 ms.
+            </summary>
+        </member>
+        <member name="F:Iot.Device.Bmxx80.StandbyTime.Ms10">
+            <summary>
+            10 ms.
+            </summary>
+        </member>
+        <member name="F:Iot.Device.Bmxx80.StandbyTime.Ms20">
+            <summary>
+            20 ms.
+            </summary>
+        </member>
+        <member name="T:System.Collections.Generic.ListBme680HeaterProfileConfig">
+            <summary>
+            List class for type Bme680HeaterProfileConfig that has been automatically generated
+            </summary>
+        </member>
+        <member name="M:System.Collections.Generic.ListBme680HeaterProfileConfig.#ctor">
+            <summary>
+            Initializes a new instance of the System.Collections.Generic.List class that
+            is empty and has the default initial capacity.
+            </summary>
+        </member>
+        <member name="M:System.Collections.Generic.ListBme680HeaterProfileConfig.#ctor(System.Collections.IEnumerable)">
+            <summary>
+            Initializes a new instance of the System.Collections.Generic.List class that
+            contains elements copied from the specified collection and has sufficient capacity
+            to accommodate the number of elements copied.
+            </summary>
+            <param name="collection">The collection whose elements are copied to the new list.</param>
+            <exception cref="T:System.ArgumentNullException">collection is null</exception>
+        </member>
+        <member name="M:System.Collections.Generic.ListBme680HeaterProfileConfig.#ctor(System.Int32)">
+            <summary>
+            Initializes a new instance of the System.Collections.Generic.List class that
+            is empty and has the specified initial capacity.
+            </summary>
+            <param name="capacity">The number of elements that the new list can initially store.</param>
+            <exception cref="T:System.ArgumentOutOfRangeException">capacity is less than 0.</exception>
+        </member>
+        <member name="P:System.Collections.Generic.ListBme680HeaterProfileConfig.Item(System.Int32)">
+            <summary>
+            Gets or sets the element at the specified index.
+            </summary>
+            <param name="index">The zero-based index of the element to get or set.</param>
+            <returns>The element at the specified index.</returns>
+            <exception cref="T:System.ArgumentOutOfRangeException">index is less than 0. -or- index is equal to or greater than System.Collections.Generic.List.Count.</exception>
+        </member>
+        <member name="P:System.Collections.Generic.ListBme680HeaterProfileConfig.Count">
+            <summary>
+            Gets the number of elements contained in the System.Collections.Generic.List
+            </summary>
+        </member>
+        <member name="P:System.Collections.Generic.ListBme680HeaterProfileConfig.Capacity">
+            <summary>
+            Gets or sets the total number of elements the internal data structure can hold
+            without resizing.
+            </summary>
+            <exception cref="T:System.ArgumentOutOfRangeException">System.Collections.Generic.List.Capacity is set to a value that is less than System.Collections.Generic.List.Count</exception>
+        </member>
+        <member name="M:System.Collections.Generic.ListBme680HeaterProfileConfig.Add(Iot.Device.Bmxx80.Bme680HeaterProfileConfig)">
+            <summary>
+            Adds an object to the end of the System.Collections.Generic.List.
+            </summary>
+            <param name="item">The object to be added to the end of the System.Collections.Generic.List. The value can be null for reference types.</param>
+        </member>
+        <member name="M:System.Collections.Generic.ListBme680HeaterProfileConfig.AddRange(System.Collections.IEnumerable)">
+            <summary>
+            Adds the elements of the specified collection to the end of the System.Collections.Generic.List.
+            </summary>
+            <param name="collection">The collection whose elements should be added to the end of the System.Collections.Generic.List.
+            The collection itself cannot be null, but it can contain elements that are null, if type Bme680HeaterProfileConfig is a reference type.
+            </param>
+            <exception cref="T:System.ArgumentNullException">collection is null.</exception>
+        </member>
+        <member name="M:System.Collections.Generic.ListBme680HeaterProfileConfig.GetEnumerator">
+            <summary>
+            Returns an enumerator that iterates through the System.Collections.Generic.List.
+            </summary>
+            <returns>A System.Collections.Generic.List.Enumerator for the System.Collections.Generic.List.</returns>
+        </member>
+        <member name="T:System.Collections.Generic.ListBme680HeaterProfileConfig.Enumerator">
+            <summary>
+            Enumerates the elements of a System.Collections.Generic.List.
+            </summary>
+        </member>
+        <member name="M:System.Collections.Generic.ListBme680HeaterProfileConfig.Enumerator.#ctor(System.Collections.Generic.ListBme680HeaterProfileConfig)">
+            <summary>
+            Create an enumerator of the collection
+            </summary>
+            <param name="collection"></param>
+        </member>
+        <member name="P:System.Collections.Generic.ListBme680HeaterProfileConfig.Enumerator.Current">
+            <summary>
+            Gets the element at the current position of the enumerator.
+            </summary>
+        </member>
+        <member name="M:System.Collections.Generic.ListBme680HeaterProfileConfig.Enumerator.Dispose">
+            <summary>
+            Releases all resources used by the System.Collections.Generic.List.Enumerator.
+            </summary>
+        </member>
+        <member name="M:System.Collections.Generic.ListBme680HeaterProfileConfig.Enumerator.MoveNext">
+            <summary>
+            Advances the enumerator to the next element of the System.Collections.Generic.List.
+            </summary>
+            <returns>true if the enumerator was successfully advanced to the next element; false if
+            the enumerator has passed the end of the collection.</returns>
+        </member>
+        <member name="M:System.Collections.Generic.ListBme680HeaterProfileConfig.Enumerator.Reset">
+            <summary>
+            Move back to first position
+            </summary>
+        </member>
+        <member name="M:System.Collections.Generic.ListBme680HeaterProfileConfig.Contains(Iot.Device.Bmxx80.Bme680HeaterProfileConfig)">
+            <summary>
+            Determines whether an element is in the System.Collections.Generic.List.
+            </summary>
+            <param name="item">The object to locate in the System.Collections.Generic.List. The value can be null for reference types.</param>
+            <returns>true if item is found in the System.Collections.Generic.List; otherwise, false.</returns>
+        </member>
+        <member name="M:System.Collections.Generic.ListBme680HeaterProfileConfig.CopyTo(Iot.Device.Bmxx80.Bme680HeaterProfileConfig[],System.Int32)">
+            <summary>
+            Copies the entire System.Collections.Generic.List to a compatible one-dimensional
+            array, starting at the specified index of the target array.
+            </summary>
+            <param name="array">The one-dimensional System.Array that is the destination of the elements copied
+            from System.Collections.Generic.List. The System.Array must have zero-based indexing.</param>
+            <param name="arrayIndex">The zero-based index in array at which copying begins.</param>
+            <exception cref="T:System.ArgumentNullException">array is null.</exception>
+            <exception cref="T:System.ArgumentOutOfRangeException">arrayIndex is less than 0.</exception>
+            <exception cref="T:System.ArgumentException">The number of elements in the source System.Collections.Generic.List is greater
+            than the available space from arrayIndex to the end of the destination array.</exception>
+        </member>
+        <member name="M:System.Collections.Generic.ListBme680HeaterProfileConfig.CopyTo(Iot.Device.Bmxx80.Bme680HeaterProfileConfig[])">
+            <summary>
+            Copies the entire System.Collections.Generic.List to a compatible one-dimensional
+            array, starting at the beginning of the target array.
+            </summary>
+            <param name="array">The one-dimensional System.Array that is the destination of the elements copied
+            from System.Collections.Generic.List. The System.Array must have zero-based indexing.</param>
+            <exception cref="T:System.ArgumentNullException">array is null.</exception>
+            <exception cref="T:System.ArgumentException">The number of elements in the source System.Collections.Generic.List is greater
+            than the number of elements that the destination array can contain.</exception>
+        </member>
+        <member name="M:System.Collections.Generic.ListBme680HeaterProfileConfig.CopyTo(System.Int32,Iot.Device.Bmxx80.Bme680HeaterProfileConfig[],System.Int32,System.Int32)">
+            <summary>
+            Copies a range of elements from the System.Collections.Generic.List to a compatible
+            one-dimensional array, starting at the specified index of the target array.
+            </summary>
+            <param name="index">The zero-based index in the source System.Collections.Generic.List at which
+            copying begins.</param>
+            <param name="array">The one-dimensional System.Array that is the destination of the elements copied
+            from System.Collections.Generic.List. The System.Array must have zero-based indexing.</param>
+            <param name="arrayIndex">The zero-based index in array at which copying begins.</param>
+            <param name="count">The number of elements to copy.</param>
+            <exception cref="T:System.ArgumentNullException">array is null.</exception>
+            <exception cref="T:System.ArgumentOutOfRangeException">index is less than 0. -or- arrayIndex is less than 0. -or- count is less than 0.</exception>
+            <exception cref="T:System.ArgumentException">index is equal to or greater than the System.Collections.Generic.List.Count
+            of the source System.Collections.Generic.List. -or- The number of elements
+            from index to the end of the source System.Collections.Generic.List is greater than the available space from arrayIndex to the end of the destination array.</exception>
+        </member>
+        <member name="M:System.Collections.Generic.ListBme680HeaterProfileConfig.GetRange(System.Int32,System.Int32)">
+            <summary>
+            Creates a shallow copy of a range of elements in the source System.Collections.Generic.List.
+            </summary>
+            <param name="index">The zero-based System.Collections.Generic.List index at which the range starts.</param>
+            <param name="count">The number of elements in the range.</param>
+            <returns> A shallow copy of a range of elements in the source System.Collections.Generic.List.</returns>
+            <exception cref="T:System.ArgumentOutOfRangeException">index is less than 0. -or- count is less than 0.</exception>
+            <exception cref="T:System.ArgumentException">index and count do not denote a valid range of elements in the System.Collections.Generic.List.</exception>
+        </member>
+        <member name="M:System.Collections.Generic.ListBme680HeaterProfileConfig.IndexOf(Iot.Device.Bmxx80.Bme680HeaterProfileConfig,System.Int32,System.Int32)">
+            <summary>
+            Searches for the specified object and returns the zero-based index of the first
+            occurrence within the range of elements in the System.Collections.Generic.List
+            that starts at the specified index and contains the specified number of elements.
+            </summary>
+            <param name="item">The object to locate in the System.Collections.Generic.List. The value can be null for reference types.</param>
+            <param name="index">The zero-based starting index of the search. 0 (zero) is valid in an empty list.</param>
+            <param name="count">The number of elements in the section to search.</param>
+            <returns>The zero-based index of the first occurrence of item within the range of elements
+            in the System.Collections.Generic.List that starts at index and contains count
+            number of elements, if found; otherwise, -1.</returns>
+            <exception cref="T:System.ArgumentOutOfRangeException">index is outside the range of valid indexes for the System.Collections.Generic.List.
+            -or- count is less than 0. -or- index and count do not specify a valid section
+            in the System.Collections.Generic.List.</exception>
+        </member>
+        <member name="M:System.Collections.Generic.ListBme680HeaterProfileConfig.IndexOf(Iot.Device.Bmxx80.Bme680HeaterProfileConfig,System.Int32)">
+            <summary>
+            Searches for the specified object and returns the zero-based index of the first
+            occurrence within the range of elements in the System.Collections.Generic.List
+            that extends from the specified index to the last element.
+            </summary>
+            <param name="item">The object to locate in the System.Collections.Generic.List. The value can be null for reference types.</param>
+            <param name="index">The zero-based starting index of the search. 0 (zero) is valid in an empty list.</param>
+            <returns>The zero-based index of the first occurrence of item within the range of elements
+            in the System.Collections.Generic.List that extends from index to the last
+            element, if found; otherwise, -1.</returns>
+            <exception cref="T:System.ArgumentOutOfRangeException">index is outside the range of valid indexes for the System.Collections.Generic.List.</exception>
+        </member>
+        <member name="M:System.Collections.Generic.ListBme680HeaterProfileConfig.IndexOf(Iot.Device.Bmxx80.Bme680HeaterProfileConfig)">
+            <summary>
+            Searches for the specified object and returns the zero-based index of the first
+            occurrence within the entire System.Collections.Generic.List.
+            </summary>
+            <param name="item">The object to locate in the System.Collections.Generic.List. The value can be null for reference types.</param>
+            <returns>The zero-based index of the first occurrence of item within the entire System.Collections.Generic.List, if found; otherwise, -1.</returns>
+        </member>
+        <member name="M:System.Collections.Generic.ListBme680HeaterProfileConfig.Insert(System.Int32,Iot.Device.Bmxx80.Bme680HeaterProfileConfig)">
+            <summary>
+            Inserts an element into the System.Collections.Generic.List at the specified index.
+            </summary>
+            <param name="index">The zero-based index at which item should be inserted.</param>
+            <param name="item">The object to insert. The value can be null for reference types.</param>
+            <exception cref="T:System.ArgumentOutOfRangeException">index is less than 0. -or- index is greater than System.Collections.Generic.List.Count.</exception>
+        </member>
+        <member name="M:System.Collections.Generic.ListBme680HeaterProfileConfig.InsertRange(System.Int32,System.Collections.IEnumerable)">
+            <summary>
+            Inserts the elements of a collection into the System.Collections.Generic.List at the specified index.
+            </summary>
+            <param name="index">The zero-based index at which the new elements should be inserted.</param>
+            <param name="collection">The collection whose elements should be inserted into the System.Collections.Generic.List. The collection itself cannot be null, but it can contain elements that are null, if type Bme680HeaterProfileConfig is a reference type.</param>
+            <exception cref="T:System.ArgumentNullException">collection is null.</exception>
+            <exception cref="T:System.ArgumentOutOfRangeException">index is less than 0. -or- index is greater than System.Collections.Generic.List.Count.</exception>
+        </member>
+        <member name="M:System.Collections.Generic.ListBme680HeaterProfileConfig.LastIndexOf(Iot.Device.Bmxx80.Bme680HeaterProfileConfig)">
+            <summary>
+            Searches for the specified object and returns the zero-based index of the last
+            occurrence within the entire System.Collections.Generic.List.
+            </summary>
+            <param name="item">The object to locate in the System.Collections.Generic.List. The value can be null for reference types.</param>
+            <returns>The zero-based index of the last occurrence of item within the entire the System.Collections.Generic.List, if found; otherwise, -1.</returns>
+        </member>
+        <member name="M:System.Collections.Generic.ListBme680HeaterProfileConfig.LastIndexOf(Iot.Device.Bmxx80.Bme680HeaterProfileConfig,System.Int32)">
+            <summary>
+            Searches for the specified object and returns the zero-based index of the last
+            occurrence within the range of elements in the System.Collections.Generic.List
+            that extends from the first element to the specified index.
+            </summary>
+            <param name="item">The object to locate in the System.Collections.Generic.List. The value can be null for reference types.</param>
+            <param name="index">The zero-based starting index of the backward search.</param>
+            <returns>The zero-based index of the last occurrence of item within the range of elements
+            in the System.Collections.Generic.List that extends from the first element
+            to index, if found; otherwise, -1.</returns>
+            <exception cref="T:System.ArgumentOutOfRangeException">index is outside the range of valid indexes for the System.Collections.Generic.List.</exception>
+        </member>
+        <member name="M:System.Collections.Generic.ListBme680HeaterProfileConfig.LastIndexOf(Iot.Device.Bmxx80.Bme680HeaterProfileConfig,System.Int32,System.Int32)">
+            <summary>
+            Searches for the specified object and returns the zero-based index of the last
+            occurrence within the range of elements in the System.Collections.Generic.List
+            that contains the specified number of elements and ends at the specified index.
+            </summary>
+            <param name="item">The object to locate in the System.Collections.Generic.List. The value can be null for reference types.</param>
+            <param name="index">The zero-based starting index of the backward search.</param>
+            <param name="count">The number of elements in the section to search.</param>
+            <returns>The zero-based index of the last occurrence of item within the range of elements
+            in the System.Collections.Generic.List that contains count number of elements
+            and ends at index, if found; otherwise, -1.</returns>
+            <exception cref="T:System.ArgumentOutOfRangeException">index is outside the range of valid indexes for the System.Collections.Generic.List. -or- count is less than 0. -or- index and count do not specify a valid section in the System.Collections.Generic.List.</exception>
+        </member>
+        <member name="M:System.Collections.Generic.ListBme680HeaterProfileConfig.Remove(Iot.Device.Bmxx80.Bme680HeaterProfileConfig)">
+            <summary>
+            Removes the first occurrence of a specific object from the System.Collections.Generic.List.
+            </summary>
+            <param name="item">The object to remove from the System.Collections.Generic.List. The value can be null for reference types.</param>
+            <returns>true if item is successfully removed; otherwise, false. This method also returns
+            false if item was not found in the System.Collections.Generic.List.</returns>
+        </member>
+        <member name="M:System.Collections.Generic.ListBme680HeaterProfileConfig.RemoveAt(System.Int32)">
+            <summary>
+            Removes the element at the specified index of the System.Collections.Generic.List.
+            </summary>
+            <param name="index">The zero-based index of the element to remove.</param>
+        </member>
+        <member name="M:System.Collections.Generic.ListBme680HeaterProfileConfig.RemoveRange(System.Int32,System.Int32)">
+            <summary>
+            Removes a range of elements from the System.Collections.Generic.List.
+            </summary>
+            <param name="index">The zero-based starting index of the range of elements to remove.</param>
+            <param name="count">The number of elements to remove.</param>
+            <exception cref="T:System.ArgumentOutOfRangeException">index is less than 0. -or- count is less than 0.</exception>
+            <exception cref="T:System.ArgumentException">index and count do not denote a valid range of elements in the System.Collections.Generic.List.</exception>
+        </member>
+        <member name="M:System.Collections.Generic.ListBme680HeaterProfileConfig.ToArray">
+            <summary>
+            Copies the elements of the System.Collections.Generic.List to a new array.
+            </summary>
+            <returns> An array containing copies of the elements of the System.Collections.Generic.List.</returns>
+        </member>
+    </members>
+</doc>
